@@ -8,7 +8,7 @@ namespace dotnet_rpg.Services.CharacterService
     public class CharacterService : ICharacterService
     {
 
-                public static int id = 1;
+        public static int id = 1;
 
         private static List<Character> characters = new List<Character>
         {
@@ -20,22 +20,36 @@ namespace dotnet_rpg.Services.CharacterService
             new Character{Id = id++,Name = "Luketa", Class = RpgClass.Hunter}
         };
         
-        public async Task<List<Character>> AddCharacter(Character newCharacter)
+        public async Task<ServiceResponse<List<Character>>> AddCharacter(Character newCharacter)
         {
+            var serviceResponse = new ServiceResponse<List<Character>>();
+            
             characters.Add(newCharacter);
-            return characters;
+
+            serviceResponse.Data = characters;
+            
+            return serviceResponse;
         }
 
-        public async Task<List<Character>> GetAllCharacters()
+        public async Task<ServiceResponse<List<Character>>> GetAllCharacters()
         {
-            return characters;
+            var serviceResponse = new ServiceResponse<List<Character>>();
+
+            serviceResponse.Data = characters;
+            
+            return serviceResponse;
         }
 
-        public async Task<Character> GetCharacterById(int Id)
+        public async Task<ServiceResponse<Character>> GetCharacterById(int Id)
         {
+            var serviceResponse = new ServiceResponse<Character>();
             var character = characters.FirstOrDefault(x=> x.Id == id);
+
             if(character is not null)
-                return character;
+            {
+                serviceResponse.Data = character;
+                return serviceResponse;
+            }
 
             throw new Exception("Character not Found");
         }
