@@ -20,20 +20,24 @@ namespace dotnet_rpg.Services.CharacterService
             new Character{Id = id++,Name = "Luketa", Class = RpgClass.Hunter}
         };
         
-        public List<Character> AddCharacter(Character newCharacter)
+        public async Task<List<Character>> AddCharacter(Character newCharacter)
         {
             characters.Add(newCharacter);
             return characters;
         }
 
-        public List<Character> GetAllCharacters()
+        public async Task<List<Character>> GetAllCharacters()
         {
             return characters;
         }
 
-        public Character GetCharacterById(int Id)
+        public async Task<Character> GetCharacterById(int Id)
         {
-           return characters.FirstOrDefault(x=> x.Id == id);
+            var character = characters.FirstOrDefault(x=> x.Id == id);
+            if(character is not null)
+                return character;
+
+            throw new Exception("Character not Found");
         }
     }
 }
