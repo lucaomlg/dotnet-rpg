@@ -67,14 +67,19 @@ namespace dotnet_rpg.Services.CharacterService
         {
             var serviceResponse = new ServiceResponse<GetCharacterDto>();
             var character = characters.FirstOrDefault(x => x.Id == updatedCharacter.Id);
-
-            character.Name = updatedCharacter.Name;
             
+            character.Name = updatedCharacter.Name;
             character.HealthPoints = updatedCharacter.HealthPoints;
-            
-            character.Name = updatedCharacter.Name;
-            
-            character.Name = updatedCharacter.Name;
+            character.Strength = updatedCharacter.Strength;
+            character.Defence = updatedCharacter.Defence;
+            character.Intelligence = updatedCharacter.Intelligence;
+            character.Class = updatedCharacter.Class;
+
+            serviceResponse.Data = _mapper.Map<GetCharacterDto>(character);
+
+            return serviceResponse;
         }
     }
 }
+
+      
