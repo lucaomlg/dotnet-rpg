@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace dotnet_rpg.DTO.Character
 {
-    public class AddCharacterDto
+    public class UpdateCharacterDto
     {
+        public int Id { get; set; }
         public string Name { get; set; } = "Frodo";
         public int HealthPoints { get; set; } = 100;
         public int Strength { get; set; } = 10;

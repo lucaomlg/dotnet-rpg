@@ -62,5 +62,19 @@ namespace dotnet_rpg.Services.CharacterService
             return serviceResponse;
 
         }
+
+        public async Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updatedCharacter)
+        {
+            var serviceResponse = new ServiceResponse<GetCharacterDto>();
+            var character = characters.FirstOrDefault(x => x.Id == updatedCharacter.Id);
+
+            character.Name = updatedCharacter.Name;
+            
+            character.HealthPoints = updatedCharacter.HealthPoints;
+            
+            character.Name = updatedCharacter.Name;
+            
+            character.Name = updatedCharacter.Name;
+        }
     }
 }
